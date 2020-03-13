@@ -5,18 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <style type="text/css">
-        .ui-datalist {
-            width:100%;
-            margin-bottom: 20px;
-            margin: auto;
-        }
 
-        .ui-datalist-item {
-            overflow: auto;
-        }
-        .ui-datalist-item:hover {
-            background-color: #d4b6b6;
-        }
 
     </style>
     <h:head>
@@ -37,7 +26,7 @@
                     <div class="ui-inputgroup">
                         <p:commandButton value="Adicionar Lembrete" action="#{lembreteBean.adicionarLembrete}" update=":form:lista"/> 
 
-                        <p:inputTextarea autoResize="false" maxlength="255" rows="6" cols="40" value="#{lembreteBean.linput.texto}" placeholder="Escreva o Lembrete Aqui..."/>
+                        <p:inputTextarea  maxlength="255" rows="6" cols="40" value="#{lembreteBean.linput.texto}" placeholder="Escreva o Lembrete Aqui..."/>
                     </div>
                 </div>  
             </div>
@@ -45,7 +34,15 @@
 
         <style type="text/css">
             .ui-row-editor .ui-row-editor-pencil {
-                margin-left:8px;
+                margin: auto;
+
+            }
+
+            .ui-editable-column{
+                word-break: break-all;
+                font-size: 1.4em ;
+                font-weight: bold;
+                font-style: italic;
             }
         </style>
 
@@ -53,12 +50,11 @@
         <h:form id="form">
             <p:growl id="msgs" showDetail="true"/>
 
-            <p:dataTable id="lista" var="l" value="#{lembreteBean.lembretes}" editable="true" style="margin-bottom:20px">
+            <p:dataTable rowHover="true" id="lista" var="l" value="#{lembreteBean.lembretes}" editable="true" style="margin-bottom:20px">
+
+                <p:ajax event="rowEdit" listener="#{lembreteBean.editarLembrete(l)}" update="lista" />
+                <p:ajax event="rowEditCancel" listener="#{lembreteBean.cancelEdit()}" update="lista" />
                 
-
-                <p:ajax event="rowEdit" listener="#{lembreteBean.editarLembrete(l)}" update=":form:msgs" />
-                <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
-
                 <p:column headerText="Lembretes">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{l.texto}" /></f:facet>
@@ -66,15 +62,15 @@
                     </p:cellEditor>
                 </p:column>
 
-                <p:column style="width:35px;" headerText="Edit">
+                <p:column style="width: 50px;" headerText="Edit">
                     <p:rowEditor />
                 </p:column >
                 <p:column  style="width:80px" headerText="Remover">
-                        <p:commandButton class="ml-2 mb-1 close" value="&times;" action="#{lembreteBean.removerLembrete(l)}" update=":form:lista" />
+                    <p:commandButton class="ml-2 mb-1 close" value="&times;" action="#{lembreteBean.removerLembrete(l)}" update=":form:lista" />
                 </p:column>
             </p:dataTable>
 
-          
+
         </h:form>
     </h:body>
 </html>

@@ -7,6 +7,7 @@ package com.esig.lembreteapp.bean;
 
 import com.esig.lembreteapp.dao.LembreteDAO;
 import com.esig.lembreteapp.model.Lembrete;
+import java.util.Comparator;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ApplicationScoped;
@@ -14,13 +15,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import org.primefaces.PrimeFaces;
+import org.primefaces.context.PrimeFacesContext;
 
 /**
  *
  * @author heitor
  */
 @ManagedBean(name = "lembreteBean")
-@RequestScoped
+@ApplicationScoped
 public class LembreteBean {
 
     private List<Lembrete> lembretes;
@@ -28,7 +31,7 @@ public class LembreteBean {
     private Lembrete linput;
 
     public LembreteBean() {
-        System.out.println("oi");
+        System.out.println("CRIANDO LEMBRETE BEAN");
         linput = new Lembrete();
         ldao = LembreteDAO.getInstance();
 
@@ -43,7 +46,6 @@ public class LembreteBean {
             linput = new Lembrete();
             lembretes = ldao.listarLembretes();
         }
-
     }
 
     public void removerLembrete(Lembrete l) {
@@ -62,6 +64,9 @@ public class LembreteBean {
             lembretes = ldao.listarLembretes();
         }
 
+    }
+    public void cancelEdit(){
+        System.out.println("Cancelando edicao");
     }
     public List<Lembrete> getLembretes() {
         return lembretes;

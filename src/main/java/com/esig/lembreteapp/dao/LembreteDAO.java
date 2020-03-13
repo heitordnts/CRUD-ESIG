@@ -68,11 +68,11 @@ public class LembreteDAO {
     public List<Lembrete> listarLembretes() {
         try {
             entityManager.getTransaction().begin();
-            List<Lembrete> result = entityManager.createQuery("select l from Lembrete l", Lembrete.class).getResultList();
+            List<Lembrete> result = entityManager.createQuery("select l from Lembrete l order by id asc", Lembrete.class).getResultList();
             //entityManager.createQuery("select l from lembretes e where = :status",
             //Module.class).setParameter("status", status).getResultList();
             for (Lembrete l : result) {
-                System.out.println("Lembrete (" + l.getTexto() + ")");
+                System.out.println("Lembrete (" + l.getId() + "," + l.getTexto() + ")");
             }
             entityManager.getTransaction().commit();
             return result;
