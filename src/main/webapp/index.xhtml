@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <style type="text/css">
+        .ui-datalist {
+            width:100%;
+            margin-bottom: 20px;
+            margin: auto;
+        }
+
+        .ui-datalist-item {
+            overflow: auto;
+        }
+        .ui-datalist-item:hover {
+            background-color: #d4b6b6;
+        }
+
+    </style>
+    <h:head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+
+        <!--Font awesome icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body class="jumbotron container-fluid" style="background-image: url('https://www.elsetge.cat/myimg/f/51-516076_best-10-apps-for-sticky-notes-you-are.jpg');">
+
+
+        <h3 class="display-4" style="margin: auto; color: activeborder" >LembreteStore</h3>
+        <h:form>    
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-md-4">
+                    <div class="ui-inputgroup">
+                        <p:commandButton value="Adicionar Lembrete" action="#{lembreteBean.adicionarLembrete}" update=":form:lista"/> 
+
+                        <p:inputTextarea autoResize="false" maxlength="255" rows="6" cols="40" value="#{lembreteBean.linput.texto}" placeholder="Escreva o Lembrete Aqui..."/>
+                    </div>
+                </div>  
+            </div>
+        </h:form>
+
+        <style type="text/css">
+            .ui-row-editor .ui-row-editor-pencil {
+                margin-left:8px;
+            }
+        </style>
+
+
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true"/>
+
+            <p:dataTable id="lista" var="l" value="#{lembreteBean.lembretes}" editable="true" style="margin-bottom:20px">
+                
+
+                <p:ajax event="rowEdit" listener="#{lembreteBean.editarLembrete(l)}" update=":form:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
+
+                <p:column headerText="Lembretes">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{l.texto}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{l.texto}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:35px;" headerText="Edit">
+                    <p:rowEditor />
+                </p:column >
+                <p:column  style="width:80px" headerText="Remover">
+                        <p:commandButton class="ml-2 mb-1 close" value="&times;" action="#{lembreteBean.removerLembrete(l)}" update=":form:lista" />
+                </p:column>
+            </p:dataTable>
+
+          
+        </h:form>
+    </h:body>
+</html>
+
