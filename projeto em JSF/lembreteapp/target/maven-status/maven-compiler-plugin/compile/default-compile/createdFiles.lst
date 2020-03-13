@@ -1,0 +1,5 @@
+com/esig/lembreteapp/dao/LembreteDAO.class
+com/esig/lembreteapp/JAXRSConfiguration.class
+com/esig/lembreteapp/resources/JavaEE8Resource.class
+com/esig/lembreteapp/bean/LembreteBean.class
+com/esig/lembreteapp/model/Lembrete.class
