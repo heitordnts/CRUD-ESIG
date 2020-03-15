@@ -66,7 +66,7 @@ $ ./asadmin start-domain domain1
 $ ./asadmin deploy --force /[pasta-do-projeto]/target/lembreteapp-1.0-SNAPSHOT.war```
 ```
 
-O aplicativo vai estar disponível em: localhost:8080/lembreteapp
+O aplicativo vai estar disponível em: http://localhost:8080/lembreteapp
 
 
 Para o undeploy fazemos,  
