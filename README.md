@@ -64,6 +64,7 @@ Para dar deploy na aplicação, precisamos e na pasta de instalação do glassfi
 ```
 $ ./asadmin start-domain domain1
 $ ./asadmin deploy --force /[pasta-do-projeto]/target/lembreteapp-1.0-SNAPSHOT.war```
+```
 
 O aplicativo vai estar disponível em: localhost:8080/lembreteapp
 
@@ -80,9 +81,9 @@ $ ./asadmin stop-domain domain1
 ### API REST Spring
 
 ```
-mvn clean package
+$ mvn clean package
 
-java -jar ./[pasta-do-projeto]/target/lembreteappspring-0.0.1-SNAPSHOT.jar
+$ java -jar ./[pasta-do-projeto]/target/lembreteappspring-0.0.1-SNAPSHOT.jar
 ```
 
 ### Client React
