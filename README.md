@@ -24,7 +24,7 @@ Foram feitas duas versões, a primeira usando JSF e a segunda usando Spring e Re
 
 - [ ] H. Utilizar testes de unidades
 
-- [ ] I. Criar single page app utilizando react
+- [x] I. Criar single page app utilizando react
 
 - [ ] J. Publicar projeto no heroku
 
@@ -34,17 +34,65 @@ Foram feitas duas versões, a primeira usando JSF e a segunda usando Spring e Re
 # Como Executar
 
 ## Requisitos
-- PostgreSQL `$ sudo apt install postgresql-all
+- Java SDK 8
+- Maven  ```$ sudo apt install mvn```
+- PostgreSQL     ```$ sudo apt install postgresql-all```
 - Linux (Foi usado o Ubuntu 18.04)
 - Netbeans 
-  - wget https://downloads.apache.org/netbeans/netbeans/11.3/Apache-NetBeans-11.3-bin-linux-x64.sh         
-  - chmod +x Apache-NetBeans-11.3-bin-linux-x64.sh 
-  - ./Apache-NetBeans-11.3-bin-linux-x64.sh 
+
+```
+$ wget https://downloads.apache.org/netbeans/netbeans/11.3/Apache-NetBeans-11.3-bin-linux-x64.sh         
+$ chmod +x Apache-NetBeans-11.3-bin-linux-x64.sh 
+$ ./Apache-NetBeans-11.3-bin-linux-x64.sh 
+```
 - [Glassfish 5.0.1](https://javaee.github.io/glassfish/download)
 - Nodejs(v12.16.1)
 - npm(v6.14.2)
 
+===
+## Aplicação JSF
+```
+mvn package
+```
 
+```
+AS_JAVA="/usr/lib/jvm/java-8-openjdk-amd64"
+```
+
+Para dar deploy na aplicação, precisamos e na pasta de instalação do glassfish em ./bin, e depois executar
+
+```
+$ ./asadmin start-domain domain1
+$ ./asadmin deploy --force /[pasta-do-projeto]/target/lembreteapp-1.0-SNAPSHOT.war```
+
+O aplicativo vai estar disponível em: localhost:8080/lembreteapp
+
+
+Para o undeploy fazemos,  
+
+```
+$ ./asadmin undeploy lembreteapp-1.0-SNAPSHOT.war
+$ ./asadmin stop-domain domain1
+```
+
+## Spring + React
+
+### API REST Spring
+
+```
+mvn clean package
+
+java -jar ./[pasta-do-projeto]/target/lembreteappspring-0.0.1-SNAPSHOT.jar
+```
+
+### Client React
+
+Vá na pasta da aplicação e execute 
+
+```
+$ npm start
+```
+a aplicação vai estar disponivel em http://localhost:3000/
 
 
 
