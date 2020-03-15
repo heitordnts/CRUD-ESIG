@@ -19,7 +19,7 @@ lembreteInput: "",
 	}
 	render(){
 		return (
-				<Jumbotron>
+				<Jumbotron key={this.state.foo}>
 				<header className="App-header">
 				LembreteStore
 				</header>
@@ -32,7 +32,7 @@ lembreteInput: "",
 					</Button>
 					</Form.Group>
 				</Form>
-				<LembreteList key={this.state.foo}/>
+				<LembreteList  key={this.state.foo}/>
 
 				</Jumbotron>
 			   );
@@ -49,6 +49,7 @@ texto: this.state.lembreteInput
 
 				this.API_addLembrete(l)
 		}
+		window.location.reload();
 	}
 
 	handleChange(event) {

@@ -2,8 +2,6 @@ import React from 'react';
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 import {Container,Row,Col} from 'react-bootstrap'
-import closeIcon from '../cross.png'
-import editIcon from '../edit.png'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit,faTrash } from "@fortawesome/free-solid-svg-icons";
 
@@ -26,13 +24,13 @@ class LembreteList extends React.Component{
 
 	componentDidMount(){
 		this.API_getLembretes();
-
 	}
 
 
 	render(){
 		return (
 				<Container >
+				{this.state.lembretes.length == 0 && <p> Sem Lembretes! Adicione no painel acima </p>}
 				{this.state.lembretes.map(
 						l => 
 						<>
@@ -78,8 +76,8 @@ class LembreteList extends React.Component{
 	}
 
 	//=======API CALLS+======================
-	async API_getLembretes(){
-		await fetch("http://localhost:5000/api/l")
+	API_getLembretes(){
+		fetch("http://localhost:5000/api/l")
 			.then(response => response.json())
 			.then(data => {
 					this.setState({
@@ -88,7 +86,6 @@ class LembreteList extends React.Component{
 					console.log(this.state.lembretes)
 					}
 				 );
-
 			}
 	API_editLembrete(l){
 		fetch("http://localhost:5000/api/l", { 
@@ -100,9 +97,10 @@ class LembreteList extends React.Component{
 				} 
 			}) 
 			.then(response => response.json())
+		window.location.reload();
 	}
-	API_removeLembrete(l){
-		fetch("http://localhost:5000/api/l", { 
+	async API_removeLembrete(l){
+		await fetch("http://localhost:5000/api/l", { 
 				method: "DELETE", 
 				body: JSON.stringify(l), 
 				headers: { 
@@ -110,6 +108,7 @@ class LembreteList extends React.Component{
 				"Access-Control-Allow-Origin": "*"
 				} 
 			}) 
+		window.location.reload();
 	}
 }
 
