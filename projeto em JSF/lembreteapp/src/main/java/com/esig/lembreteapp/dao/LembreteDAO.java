@@ -32,7 +32,7 @@ public class LembreteDAO {
             emf = Persistence.createEntityManagerFactory("punit");
         }
 
-        if (entityManager == null) {
+        if (emf != null && entityManager == null) {
             entityManager = emf.createEntityManager();
         }
 
@@ -71,9 +71,9 @@ public class LembreteDAO {
             List<Lembrete> result = entityManager.createQuery("select l from Lembrete l order by id asc", Lembrete.class).getResultList();
             //entityManager.createQuery("select l from lembretes e where = :status",
             //Module.class).setParameter("status", status).getResultList();
-            for (Lembrete l : result) {
-                System.out.println("Lembrete (" + l.getId() + "," + l.getTexto() + ")");
-            }
+            //for (Lembrete l : result) {
+            //    System.out.println("Lembrete (" + l.getId() + "," + l.getTexto() + ")");
+            //}
             entityManager.getTransaction().commit();
             return result;
         } catch (Exception e) {

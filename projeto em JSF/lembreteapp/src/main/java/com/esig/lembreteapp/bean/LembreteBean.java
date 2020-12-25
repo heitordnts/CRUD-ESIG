@@ -39,19 +39,19 @@ public class LembreteBean {
     }
 
     public void adicionarLembrete() {
-
         if (!linput.getTexto().isEmpty()) {
             System.out.println("Bean: Inserindo Lembrete " + linput.getTexto());
             ldao.adicionarLembrete(linput);
             linput = new Lembrete();
             lembretes = ldao.listarLembretes();
         }
+
     }
 
     public void removerLembrete(Lembrete l) {
         System.out.println("Bean: Removendo Lembrete " + "id:" + l.getId());
         if (l.getId() != null) {
-            System.out.println("Bean: Removendo Lembrete " + "id:" + l.getId() + "texto:" + l.getTexto());
+            //System.out.println("Bean: Removendo Lembrete " + "id:" + l.getId() + "texto:" + l.getTexto());
             ldao.excluirLembrete(l);
             lembretes = ldao.listarLembretes();
         }
@@ -63,7 +63,6 @@ public class LembreteBean {
             ldao.atualizarLembrete(l);
             lembretes = ldao.listarLembretes();
         }
-
     }
     public void cancelEdit(){
         System.out.println("Cancelando edicao");
