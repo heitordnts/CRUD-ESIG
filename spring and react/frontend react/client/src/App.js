@@ -9,8 +9,7 @@ class App extends React.Component {
 	constructor(props){
 		super(props)
 			this.state={
-lembreteInput: "",
-			   foo: 1
+				lembreteInput: "",
 			}
 
 		this.API_addLembrete= this.API_addLembrete.bind(this);
@@ -19,7 +18,7 @@ lembreteInput: "",
 	}
 	render(){
 		return (
-				<Jumbotron key={this.state.foo}>
+				<Jumbotron>
 				<header className="App-header">
 				LembreteStore
 				</header>
@@ -32,24 +31,22 @@ lembreteInput: "",
 					</Button>
 					</Form.Group>
 				</Form>
-				<LembreteList  key={this.state.foo}/>
+				<LembreteList/>
 
 				</Jumbotron>
 			   );
 	}
 
 	handleAdd(){
-		this.setState({foo: this.state.foo+1});
-		if(this.state.lembreteInput != ""){
+		if(this.state.lembreteInput !== ""){
 			const l = {
-texto: this.state.lembreteInput
+				texto: this.state.lembreteInput
 			}
 			console.log('texto eh')
-				console.log(l)
+			console.log(l)
 
-				this.API_addLembrete(l)
+			this.API_addLembrete(l)
 		}
-		window.location.reload();
 	}
 
 	handleChange(event) {
@@ -73,6 +70,8 @@ texto: this.state.lembreteInput
 				} 
 			}) 
 			.then(response => response.json())
+
+		//window.location.reload();
 	}
 }
 

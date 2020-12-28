@@ -12,7 +12,6 @@ class LembreteList extends React.Component{
 
 		this.state={
 			lembretes: [],
-			foo: 1
 		}
 
 		this.API_getLembretes= this.API_getLembretes.bind(this);
@@ -24,20 +23,20 @@ class LembreteList extends React.Component{
 
 	componentDidMount(){
 		this.API_getLembretes();
+		setInterval(this.API_getLembretes,1000);
 	}
-
 
 	render(){
 		return (
 				<Container >
-				{this.state.lembretes.length == 0 && <p> Sem Lembretes! Adicione no painel acima </p>}
+				{this.state.lembretes.length === 0 && <p> Sem Lembretes! Adicione no painel acima </p>}
 				{this.state.lembretes.map(
 						l => 
 						<>
-					  	<Row className="my-1" key={this.state.lembretes.length} >
-							<Col style={{'word-break': 'break-all'}}>
+					  	<Row className="my-1" key={l.id} >
+							<Col style={{'wordBreak': 'break-all'}}>
 								<ListGroup>
-								<ListGroup.Item>
+								<ListGroup.Item >
 									{l.texto}
 								</ListGroup.Item>
 								</ListGroup>
@@ -69,7 +68,7 @@ class LembreteList extends React.Component{
 	}
 	handleEdit(l){
 		console.log(l);
-		l.texto = l.texto+'[edited]'
+		l.texto = l.texto+"[editado]";
 		this.API_editLembrete(l)
 		this.API_getLembretes();
 
@@ -97,7 +96,7 @@ class LembreteList extends React.Component{
 				} 
 			}) 
 			.then(response => response.json())
-		window.location.reload();
+		//window.location.reload();
 	}
 	async API_removeLembrete(l){
 		await fetch("http://localhost:5000/api/l", { 
@@ -108,7 +107,7 @@ class LembreteList extends React.Component{
 				"Access-Control-Allow-Origin": "*"
 				} 
 			}) 
-		window.location.reload();
+		//window.location.reload();
 	}
 }
 
